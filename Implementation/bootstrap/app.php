@@ -18,13 +18,13 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api(prepend: [
-            \App\Http\Middleware\CheckBanned::class,
+            \App\Http\Middleware\EnsureNotBanned::class,
         ]);
 
         $middleware->alias([
             'verified' => \App\Http\Middleware\EnsureEmailIsVerified::class,
             'admin'    => \App\Http\Middleware\EnsureAdmin::class,
-            'banned'   => \App\Http\Middleware\CheckBanned::class,
+            'banned'   => \App\Http\Middleware\EnsureNotBanned::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
