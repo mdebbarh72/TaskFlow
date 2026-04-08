@@ -11,6 +11,7 @@ use App\Modules\Auth\Listeners\SendWelcomeEmailListener;
 use Illuminate\Support\Facades\Gate;
 use App\Modules\Projects\Models\Project;
 use App\Modules\Projects\Policies\ProjectPolicy;
+use App\Modules\Projects\Policies\MembershipPolicy;
 use App\Modules\Board\Models\Card;
 use App\Modules\Board\Models\Sprint;
 use App\Modules\Board\Policies\CardPolicy;
@@ -65,6 +66,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(Project::class, ProjectPolicy::class);
+        Gate::define('leaveMembership', [MembershipPolicy::class, 'leave']);
         Gate::policy(Card::class, CardPolicy::class);
         Gate::policy(Sprint::class, SprintPolicy::class);
         Gate::policy(Comment::class, CommentPolicy::class);
