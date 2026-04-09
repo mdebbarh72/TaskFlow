@@ -8,5 +8,4 @@ enum CardStatus: string
     case DOING = 'doing';
     case DONE = 'done';
     case REVIEWING = 'reviewing';
-    case TESTING = 'testing';
 }

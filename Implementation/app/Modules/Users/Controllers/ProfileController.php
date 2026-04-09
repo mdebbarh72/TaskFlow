@@ -12,19 +12,28 @@ class ProfileController extends Controller
 {
     public function show(Request $request): JsonResponse
     {
-        return response()->json($request->user());
+        return response()->json($request->user()->load('profile'));
     }
 
     public function update(Request $request): JsonResponse
     {
         $request->validate([
-            'name'  => 'sometimes|string|max:255',
+            'first_name' => 'sometimes|string|max:255',
+            'last_name' => 'sometimes|string|max:255',
             'email' => 'sometimes|email|unique:users,email,' . $request->user()->id,
+            'username' => 'sometimes|string|max:255|unique:profiles,username,' . optional($request->user()->profile)->id,
         ]);
 
-        $request->user()->update($request->only('name', 'email'));
+        $request->user()->update($request->only('first_name', 'last_name', 'email'));
 
-        return response()->json($request->user()->fresh());
+        if ($request->has('username')) {
+            $request->user()->profile()->updateOrCreate(
+                ['user_id' => $request->user()->id],
+                ['username' => $request->string('username')->toString()]
+            );
+        }
+
+        return response()->json($request->user()->fresh()->load('profile'));
     }
 
     public function changePassword(Request $request): JsonResponse

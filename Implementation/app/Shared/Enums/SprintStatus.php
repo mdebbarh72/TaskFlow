@@ -5,6 +5,6 @@ namespace App\Shared\Enums;
 enum SprintStatus: string
 {
     case PENDING = 'pending';
-    case ACTIVE = 'active';
+    case IN_PROCESS = 'in_process';
     case COMPLETED = 'completed';
 }
