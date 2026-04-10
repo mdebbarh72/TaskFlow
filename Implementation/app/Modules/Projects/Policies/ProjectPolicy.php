@@ -14,7 +14,7 @@ class ProjectPolicy
 
     public function viewAny(User $user): bool
     {
-        return true;
+        return $user !== null;
     }
 
     public function view(User $user, Project $project): bool
@@ -29,10 +29,7 @@ class ProjectPolicy
 
     public function update(User $user, Project $project): bool
     {
-        return in_array($this->getRole($user, $project), [
-            MembershipRole::OWNER->value,
-            MembershipRole::MANAGER->value,
-        ]);
+        return $this->getRole($user, $project) === MembershipRole::OWNER->value;
     }
 
     public function delete(User $user, Project $project): bool
@@ -42,15 +39,12 @@ class ProjectPolicy
 
     public function manageMembers(User $user, Project $project): bool
     {
-        return in_array($this->getRole($user, $project), [
-            MembershipRole::OWNER->value,
-            MembershipRole::MANAGER->value,
-        ]);
+        return $this->getRole($user, $project) === MembershipRole::OWNER->value;
     }
 
     private function getRole(User $user, Project $project): ?string
     {
-        if ($user->id === $project->owner_id) {
+        if ((int) $user->id === (int) $project->owner_id) {
             return MembershipRole::OWNER->value;
         }
 

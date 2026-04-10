@@ -13,7 +13,7 @@ class ProjectBacklogController extends Controller
         $this->authorize('view', $project);
 
         $sprints = $project->sprints()
-            ->whereIn('status', ['pending', 'active'])
+            ->whereIn('status', ['pending', 'in_process'])
             ->with('cards')
             ->get();
 

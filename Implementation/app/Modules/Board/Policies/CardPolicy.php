@@ -31,6 +31,11 @@ class CardPolicy
     public function update(User $user, Card $card): bool
     {
         $project = $this->resolveProject($card);
+        $role = $this->getRole($user, $project);
+
+        if ($role === MembershipRole::VIEWER->value) {
+            return false;
+        }
 
         if ($this->hasRole($user, $project, [MembershipRole::OWNER, MembershipRole::MANAGER])) {
             return true;
@@ -51,7 +56,21 @@ class CardPolicy
 
     public function move(User $user, Card $card): bool
     {
-        return $this->isMember($user, $this->resolveProject($card));
+        $project = $this->resolveProject($card);
+        if (!$this->isMember($user, $project)) {
+            return false;
+        }
+
+        $role = $this->getRole($user, $project);
+        if ($role === MembershipRole::VIEWER->value) {
+            return false;
+        }
+
+        if (in_array($role, [MembershipRole::OWNER->value, MembershipRole::MANAGER->value], true)) {
+            return true;
+        }
+
+        return (int) $card->assignee_id === (int) $user->id;
     }
 
     /**
@@ -88,5 +107,17 @@ class CardPolicy
             ->first();
 
         return $membership && in_array($membership->role, $roleValues);
+    }
+
+    private function getRole(User $user, Project $project): ?string
+    {
+        if ($user->id === $project->owner_id) {
+            return MembershipRole::OWNER->value;
+        }
+
+        return $project->memberships()
+            ->where('user_id', $user->id)
+            ->where('status', MembershipStatus::ACTIVE->value)
+            ->value('role');
     }
 }

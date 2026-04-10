@@ -17,15 +17,16 @@ class DashboardController extends Controller
                 'total' => $project->cards()->count(),
                 'todo'  => $project->cards()->where('status', 'todo')->count(),
                 'doing' => $project->cards()->where('status', 'doing')->count(),
+                'inReview' => $project->cards()->where('status', 'reviewing')->count(),
                 'done'  => $project->cards()->where('status', 'done')->count(),
             ],
             'sprints' => [
                 'total'     => $project->sprints()->count(),
-                'active'    => $project->sprints()->where('status', 'active')->count(),
+                'active'    => $project->sprints()->where('status', 'in_process')->count(),
                 'completed' => $project->sprints()->where('status', 'completed')->count(),
             ],
             'recent_activity' => $project->activityLogs()
-                ->with('user:id,name,email')
+                ->with('user:id,first_name,last_name,email')
                 ->latest()
                 ->limit(10)
                 ->get(),

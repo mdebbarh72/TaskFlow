@@ -19,6 +19,13 @@ class MembershipRepository implements MembershipRepositoryInterface
         return Membership::create($data);
     }
 
+    public function countActiveByProject(int $projectId): int
+    {
+        return Membership::where('project_id', $projectId)
+            ->where('status', 'active')
+            ->count();
+    }
+
     public function delete(Membership $membership): bool
     {
         return $membership->delete();

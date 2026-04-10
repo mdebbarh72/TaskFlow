@@ -24,7 +24,7 @@ class MembershipController extends Controller
 
         $request->validate([
             'email' => 'required|email',
-            'role'  => 'nullable|string|in:owner,manager,member,viewer',
+            'role'  => 'nullable|string|in:manager,member,viewer',
         ]);
 
         $dto = new InviteMemberDTO(
@@ -51,5 +51,19 @@ class MembershipController extends Controller
         $this->membershipService->remove($project, $userId);
 
         return response()->json(['message' => 'Member removed successfully.']);
+    }
+
+    public function leave(Project $project): JsonResponse
+    {
+        $response = Gate::inspect('leaveMembership', $project);
+        if ($response->denied()) {
+            return response()->json([
+                'message' => $response->message() ?: 'You are not allowed to leave this project.',
+            ], 403);
+        }
+
+        $this->membershipService->leave($project, auth()->user());
+
+        return response()->json(['message' => 'You have left the project successfully.']);
     }
 }

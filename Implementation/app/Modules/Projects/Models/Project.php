@@ -7,9 +7,17 @@ use App\Modules\Users\Models\User;
 use App\Shared\Traits\HasActivityLog;
 use App\Shared\Enums\MembershipStatus;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 class Project extends Model
 {
-    use HasActivityLog;
+    use HasActivityLog, HasFactory, SoftDeletes;
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\ProjectFactory::new();
+    }
 
     protected $fillable = ['name', 'description', 'owner_id'];
 

@@ -11,7 +11,12 @@ class CreateSprintRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        $project = $this->route('project');
+        $projectParam = $this->route('project');
+        
+        // If route model binding didn't happen (common in modular structures or non-resource routes)
+        $project = $projectParam instanceof Project 
+            ? $projectParam 
+            : Project::find($projectParam);
 
         return $project instanceof Project
             && $this->user()->can('create', [Sprint::class, $project]);
@@ -31,7 +36,7 @@ class CreateSprintRequest extends FormRequest
     {
         return new CreateSprintDTO(
             name:        $this->validated('name'),
-            projectId:   $this->route('project')->id,
+            projectId:   is_object($this->route('project')) ? $this->route('project')->id : (int)$this->route('project'),
             description: $this->validated('description'),
             startDate:   $this->validated('start_date'),
             endDate:     $this->validated('end_date'),

@@ -51,7 +51,7 @@ class SprintService
     public function start(Sprint $sprint): void
     {
         $alreadyActive = Sprint::where('project_id', $sprint->project_id)
-            ->where('status', SprintStatus::ACTIVE->value)
+            ->where('status', SprintStatus::IN_PROCESS->value)
             ->where('id', '!=', $sprint->id)
             ->exists();
 
@@ -61,13 +61,19 @@ class SprintService
             );
         }
 
-        $this->sprints->update($sprint->id, ['status' => SprintStatus::ACTIVE->value]);
+        $this->sprints->update($sprint->id, [
+            'status' => SprintStatus::IN_PROCESS->value,
+            'started_at' => now(),
+        ]);
         $this->logActivity($sprint, 'started');
     }
 
     public function complete(Sprint $sprint): void
     {
-        $this->sprints->update($sprint->id, ['status' => SprintStatus::COMPLETED->value]);
+        $this->sprints->update($sprint->id, [
+            'status' => SprintStatus::COMPLETED->value,
+            'ended_at' => now(),
+        ]);
         $this->logActivity($sprint, 'completed');
     }
 

@@ -19,7 +19,7 @@ class UpdateCardRequest extends FormRequest
         return [
             'title'       => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'status'      => 'nullable|string|in:todo,doing,done',
+            'status'      => 'nullable|string|in:todo,doing,reviewing,done',
             'priority'    => 'nullable|string|in:low,medium,high,blocker',
             'assignee_id' => 'nullable|exists:users,id',
             'sprint_id'   => 'nullable|exists:sprints,id',

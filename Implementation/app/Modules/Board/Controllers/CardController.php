@@ -50,6 +50,7 @@ class CardController extends Controller
     public function show(Card $card): JsonResponse
     {
         $this->authorize('view', $card);
+        $card->load(['sprint', 'assignee', 'subtasks']);
 
         return response()->json($card);
     }
@@ -73,7 +74,7 @@ class CardController extends Controller
     {
         $this->authorize('move', $card);
 
-        $request->validate(['status' => 'required|string|in:todo,doing,done']);
+        $request->validate(['status' => 'required|string|in:todo,doing,done,reviewing']);
 
         $this->cardService->move(new MoveCardDTO(
             cardId:    $card->id,
@@ -88,7 +89,7 @@ class CardController extends Controller
     {
         $this->authorize('assign', $card);
 
-        $request->validate(['assignee_id' => 'required|exists:users,id']);
+        $request->validate(['assignee_id' => 'nullable|exists:users,id']);
 
         $this->cardService->assign(new AssignCardDTO(
             cardId:     $card->id,
@@ -108,8 +109,38 @@ class CardController extends Controller
 
         $this->cardService->update($card, new UpdateCardDTO(
             sprintId: $request->sprint_id ? (int) $request->sprint_id : null,
+            updateSprint: true,
         ));
 
         return response()->json(['message' => 'Card sprint assignment updated.']);
+    }
+
+    public function addSubtask(Request $request, Card $card): JsonResponse
+    {
+        $this->authorize('update', $card);
+        $request->validate(['title' => 'required|string|max:255']);
+
+        $subtask = $card->subtasks()->create([
+            'title' => $request->title,
+            'is_completed' => false,
+        ]);
+
+        return response()->json($subtask, 201);
+    }
+
+    public function toggleSubtask(Card $card, \App\Modules\Board\Models\Subtask $subtask): JsonResponse
+    {
+        $this->authorize('update', $card);
+        $subtask->update(['is_completed' => !$subtask->is_completed]);
+
+        return response()->json($subtask);
+    }
+
+    public function deleteSubtask(Card $card, \App\Modules\Board\Models\Subtask $subtask): JsonResponse
+    {
+        $this->authorize('update', $card);
+        $subtask->delete();
+
+        return response()->json(['message' => 'Subtask deleted']);
     }
 }

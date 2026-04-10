@@ -9,6 +9,7 @@ use App\Modules\Users\Repositories\Contracts\UserRepositoryInterface;
 use App\Infrastructure\Email\Contracts\MailerInterface;
 use App\Shared\Enums\MembershipStatus;
 use App\Shared\Exceptions\UserNotFoundException;
+use App\Modules\Users\Models\User;
 use Exception;
 
 class MembershipService
@@ -51,5 +52,25 @@ class MembershipService
         if ($membership) {
             $this->memberships->delete($membership);
         }
+    }
+
+    public function leave(Project $project, User $user): void
+    {
+        if ((int) $project->owner_id === (int) $user->id) {
+            $activeMembers = $this->memberships->countActiveByProject($project->id);
+            if ($activeMembers > 1) {
+                throw new Exception('Project owner can only leave when they are the last active member.');
+            }
+        }
+
+        $membership = $this->memberships->findByProjectAndUser($project->id, $user->id);
+        if (!$membership) {
+            throw new Exception('Membership not found for this project.');
+        }
+
+        $membership->update([
+            'status' => MembershipStatus::INACTIVE->value,
+            'left_at' => now(),
+        ]);
     }
 }

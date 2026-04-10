@@ -13,7 +13,7 @@ class ProjectBoardController extends Controller
         $this->authorize('view', $project);
 
         $activeSprints = $project->sprints()
-            ->where('status', 'active')
+            ->where('status', 'in_process')
             ->with('cards')
             ->get();
 

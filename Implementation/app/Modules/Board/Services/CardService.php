@@ -14,6 +14,8 @@ use App\Modules\Board\Events\CardDeleted;
 use App\Modules\Board\Events\CardMoved;
 use App\Modules\Board\Events\CardAssigned;
 use App\Shared\Enums\CardStatus;
+use App\Shared\Enums\MembershipRole;
+use App\Shared\Enums\MembershipStatus;
 use App\Shared\Enums\SprintStatus;
 use App\Modules\Collaboration\Services\ActivityLogService;
 use App\Modules\Collaboration\DTOs\LogActivityDTO;
@@ -48,7 +50,7 @@ class CardService
     {
         $card = $this->cards->findById($dto->cardId);
 
-        if (!$card->sprint_id || $card->sprint->status !== SprintStatus::ACTIVE->value) {
+        if (!$card->sprint_id || $card->sprint->status !== SprintStatus::IN_PROCESS->value) {
             throw new InvalidArgumentException(
                 'Cards can only be moved on the board when they belong to an active sprint.'
             );
@@ -62,6 +64,24 @@ class CardService
     public function assign(AssignCardDTO $dto): void
     {
         $card = $this->cards->findById($dto->cardId);
+
+        if ($dto->assigneeId !== null) {
+            $project = $card->project_id ? $card->project : $card->sprint->project;
+
+            $membership = $project->memberships()
+                ->where('user_id', $dto->assigneeId)
+                ->where('status', MembershipStatus::ACTIVE->value)
+                ->first();
+
+            if (!$membership) {
+                throw new InvalidArgumentException('Assignee must be an active member of the project.');
+            }
+
+            if ($membership->role === MembershipRole::VIEWER->value) {
+                throw new InvalidArgumentException('Cards cannot be assigned to viewers.');
+            }
+        }
+
         $this->cards->updateAssignee($dto->cardId, $dto->assigneeId);
         CardAssigned::dispatch($dto->cardId, $dto->assigneeId, $dto->assignedBy);
         $this->logActivity($card, 'assigned');
@@ -70,7 +90,7 @@ class CardService
     public function update(Card $card, UpdateCardDTO $dto): void
     {
         if ($dto->status !== null && $dto->status->value !== $card->status) {
-            if (!$card->sprint_id || $card->sprint->status !== SprintStatus::ACTIVE->value) {
+            if (!$card->sprint_id || $card->sprint->status !== SprintStatus::IN_PROCESS->value) {
                 throw new InvalidArgumentException(
                     'Card status can only be changed while the card is in an active sprint.'
                 );
@@ -112,6 +132,7 @@ class CardService
             action:         "card_{$action}",
             actionableId:   $card->id,
             actionableType: Card::class,
+            projectId:      $card->project_id,
         ));
     }
 }

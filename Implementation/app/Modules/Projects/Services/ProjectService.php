@@ -32,8 +32,15 @@ class ProjectService
             'description' => $dto->description,
             'owner_id'    => $dto->ownerId,
         ]);
+
+        // Automatically add owner as an active member
+        $project->memberships()->create([
+            'user_id' => $dto->ownerId,
+            'role'    => \App\Shared\Enums\MembershipRole::OWNER->value,
+            'status'  => \App\Shared\Enums\MembershipStatus::ACTIVE->value,
+        ]);
         
-        return $project;
+        return $project->fresh();
     }
 
     public function update(Project $project, UpdateProjectDTO $dto): bool
