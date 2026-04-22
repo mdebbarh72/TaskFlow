@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import api from '../api';
+import api from '../api.js';
 
 const AuthContext = createContext();
 
@@ -115,6 +115,7 @@ export const AuthProvider = ({ children }) => {
       loading, 
       authenticated: !!user, 
       isAdmin: user?.role === 'admin',
+      isBanned: user?.status === 'banned',
       login, 
       logout,
       signup,
