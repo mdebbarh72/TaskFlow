@@ -1,6 +1,7 @@
 import React from 'react';
 
 const ProjectCard = ({ project, onEdit, onDelete, onClick }) => {
+  const isOwner = project.current_user_role === 'owner';
   const formattedDate = new Date(project.created_at).toLocaleDateString('en-US', {
     month: 'short',
     day: 'numeric',
@@ -20,22 +21,24 @@ const ProjectCard = ({ project, onEdit, onDelete, onClick }) => {
           {project.name.charAt(0).toUpperCase()}
         </div>
         
-        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        {isOwner && (
+        <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity relative z-10">
           <button 
-            onClick={(e) => { e.stopPropagation(); onEdit(project); }}
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onEdit(project); }}
             className="p-2 rounded-lg text-[var(--color-on-surface-variant)] hover:bg-[var(--color-surface-container-high)] hover:text-[var(--color-primary)] transition-all"
             title="Edit Project"
           >
             <i className="fa-solid fa-pen-to-square text-[16px]"></i>
           </button>
           <button 
-            onClick={(e) => { e.stopPropagation(); onDelete(project); }}
+            onClick={(e) => { e.preventDefault(); e.stopPropagation(); onDelete(project); }}
             className="p-2 rounded-lg text-[var(--color-on-surface-variant)] hover:bg-red-50 hover:text-red-500 transition-all"
             title="Delete Project"
           >
             <i className="fa-solid fa-trash-can text-[16px]"></i>
           </button>
         </div>
+        )}
       </div>
       
       <h3 className="text-lg font-bold text-[var(--color-on-surface)] group-hover:text-[var(--color-primary)] transition-colors mb-2 line-clamp-1">
@@ -50,7 +53,7 @@ const ProjectCard = ({ project, onEdit, onDelete, onClick }) => {
           <i className="fa-regular fa-calendar text-[12px] text-[var(--color-primary)]/60"></i> {formattedDate}
         </span>
         <span className="flex items-center gap-1.5 bg-[var(--color-surface-container-low)] px-2.5 py-1 rounded-full text-[var(--color-on-surface-variant)]">
-          <i className="fa-solid fa-users text-[12px]"></i> {project.owner_id === project.current_user_id ? 'Owner' : 'Member'}
+          <i className="fa-solid fa-users text-[12px]"></i> {project.current_user_role || 'member'}
         </span>
       </div>
     </div>

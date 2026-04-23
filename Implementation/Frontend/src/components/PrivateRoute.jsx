@@ -3,7 +3,7 @@ import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
 const PrivateRoute = () => {
-  const { authenticated, loading } = useAuth();
+  const { authenticated, loading, isBanned } = useAuth();
 
   if (loading) {
     return (
@@ -13,7 +13,10 @@ const PrivateRoute = () => {
     );
   }
 
-  return authenticated ? <Outlet /> : <Navigate to="/login" replace />;
+  if (!authenticated) return <Navigate to="/login" replace />;
+  if (isBanned) return <Navigate to="/banned" replace />;
+
+  return <Outlet />;
 };
 
 export default PrivateRoute;

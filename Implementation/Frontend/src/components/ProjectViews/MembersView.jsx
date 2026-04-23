@@ -1,18 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import api from '../../../api/api';
+import api from '../../api.js';
+import { useAuth } from '../../context/AuthContext';
+import { toast } from 'react-hot-toast';
 
-const MembersView = ({ projectId }) => {
+const MembersView = ({ project, currentUserRole }) => {
+  const { user: currentUser } = useAuth();
   const [members, setMembers] = useState([]);
   const [email, setEmail] = useState('');
   const [role, setRole] = useState('viewer');
   const [loading, setLoading] = useState(false);
+  const [fetching, setFetching] = useState(true);
+
+  const projectId = project.id;
+  const isOwner = currentUserRole === 'owner';
 
   useEffect(() => {
-    setMembers([
-      { id: 1, name: 'Owner User', email: 'owner@example.com', role: 'owner' },
-      { id: 2, name: 'Invited User', email: 'invited@test.com', role: 'viewer' }
-    ]);
+    fetchMembers();
   }, [projectId]);
+
+  const fetchMembers = async () => {
+    try {
+      setFetching(true);
+      const res = await api.get(`/projects/${projectId}/members`);
+      setMembers(res.data.members || []);
+    } catch(err) {
+      console.error('Failed to fetch members:', err);
+    } finally {
+      setFetching(false);
+    }
+  };
 
   const handleInvite = async (e) => {
     e.preventDefault();
@@ -20,13 +36,49 @@ const MembersView = ({ projectId }) => {
     setLoading(true);
     try {
       await api.post(`/projects/${projectId}/invite`, { email, role });
+      toast.success(`Invitation sent to ${email}`);
       setEmail('');
-      setLoading(false);
+      fetchMembers();
     } catch(err) {
-      console.error(err);
+      const msg = err.response?.data?.message || 'Failed to invite member';
+      toast.error(msg);
+    } finally {
       setLoading(false);
     }
   };
+
+  const handleRemoveMember = async (userId) => {
+    if (!window.confirm('Are you sure you want to remove this member from the project?')) return;
+    
+    try {
+      await api.delete(`/projects/${projectId}/members/${userId}`);
+      setMembers(prev => prev.filter(m => m.id !== userId));
+      toast.success('Member removed successfully');
+    } catch (err) {
+      const msg = err.response?.data?.message || 'Failed to remove member';
+      toast.error(msg);
+    }
+  };
+
+  const handleLeaveProject = async () => {
+    if (!window.confirm('Are you sure you want to leave this project?')) return;
+    try {
+      await api.delete(`/projects/${projectId}/leave`);
+      toast.success('You left the project');
+      window.location.href = '/projects';
+    } catch (err) {
+      toast.error(err.response?.data?.message || 'Failed to leave project');
+    }
+  };
+
+  if (fetching) return (
+    <div className="p-8 text-[var(--color-on-surface-variant)] flex items-center justify-center h-full">
+      <div className="flex flex-col items-center gap-4">
+        <i className="fa-solid fa-circle-notch fa-spin text-4xl text-[var(--color-primary)]"></i>
+        <span className="font-medium animate-pulse">Loading Team...</span>
+      </div>
+    </div>
+  );
 
   return (
     <div className="p-6 max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
@@ -42,7 +94,7 @@ const MembersView = ({ projectId }) => {
             <div key={member.id} className="bg-[var(--color-surface-container-lowest)] border border-[var(--color-surface-container-high)] rounded-2xl p-4 flex items-center justify-between hover:shadow-sm transition-shadow">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-gradient-to-tr from-[var(--color-primary)] to-[var(--color-tertiary)] flex items-center justify-center text-[var(--color-on-primary)] font-bold text-lg shadow-md">
-                  {member.name.charAt(0)}
+                  {member.name?.charAt(0) || '?'}
                 </div>
                 <div>
                   <h4 className="font-bold text-[var(--color-on-surface)] text-sm">{member.name}</h4>
@@ -53,13 +105,20 @@ const MembersView = ({ projectId }) => {
                 <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase border
                   ${member.role === 'owner' ? 'bg-purple-500/10 text-purple-400 border-purple-500/20' : 
                     member.role === 'manager' ? 'bg-blue-500/10 text-blue-400 border-blue-500/20' : 
+                    member.role === 'member' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' :
                     'bg-gray-500/10 text-gray-400 border-gray-500/20'}
                 `}>
                   {member.role}
                 </span>
-                <button className="text-[var(--color-on-surface-variant)] hover:text-red-500 transition-colors ml-4 p-2">
-                  <i className="fa-solid fa-ellipsis"></i>
-                </button>
+                
+                {isOwner && member.id !== currentUser.id && (
+                  <button 
+                    onClick={() => handleRemoveMember(member.id)}
+                    className="flex items-center gap-2 text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg transition-colors text-xs font-bold border border-transparent hover:border-red-100"
+                  >
+                    <i className="fa-solid fa-user-minus"></i> Remove
+                  </button>
+                )}
               </div>
             </div>
           ))}
@@ -67,12 +126,19 @@ const MembersView = ({ projectId }) => {
       </div>
 
       {/* Right Col - Invite */}
-      <div className="w-full lg:w-[400px]">
+      <div className="w-full lg:w-[400px] space-y-4">
+        {!isOwner && (
+          <button
+            onClick={handleLeaveProject}
+            className="w-full border border-red-300 text-red-600 hover:bg-red-50 font-semibold py-2.5 rounded-xl transition-colors"
+          >
+            Leave Project
+          </button>
+        )}
+        {isOwner && (
         <div className="bg-[var(--color-surface-container-lowest)] border border-[var(--color-surface-container-high)] rounded-2xl p-6 sticky top-6 shadow-md">
            <div className="flex items-center gap-2 mb-4">
-             <div className="bg-[var(--color-primary)]/10 p-2 px-2.5 rounded-lg text-[var(--color-primary)]">
-               <i className="fa-solid fa-envelope"></i>
-             </div>
+             <i className="fa-solid fa-envelope text-[20px] text-[var(--color-primary)]"></i>
              <h3 className="font-bold text-lg text-[var(--color-on-surface)]">Invite Member</h3>
            </div>
            
@@ -99,7 +165,6 @@ const MembersView = ({ projectId }) => {
                  onChange={(e) => setRole(e.target.value)}
                  className="w-full bg-[var(--color-surface)] border border-[var(--color-surface-container-high)] rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] transition-all appearance-none"
                >
-                 <option value="owner">Owner (Full Access)</option>
                  <option value="manager">Manager (Can manage sprints/cards)</option>
                  <option value="member">Member (Can edit assigned cards)</option>
                  <option value="viewer">Viewer (Read-only)</option>
@@ -118,10 +183,11 @@ const MembersView = ({ projectId }) => {
            <div className="mt-6 p-4 bg-amber-500/10 border border-amber-500/20 rounded-xl flex gap-3 text-amber-500">
               <i className="fa-solid fa-shield-halved mt-0.5 text-lg"></i>
               <p className="text-xs font-medium leading-relaxed">
-                If the email address doesn't belong to a registered user, an account will be automatically generated with the Viewer role applied to this project.
+                Invited members will receive an email to join the project.
               </p>
            </div>
         </div>
+        )}
       </div>
     </div>
   );

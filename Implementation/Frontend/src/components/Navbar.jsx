@@ -32,10 +32,8 @@ const Navbar = () => {
   return (
     <>
       <nav className="glass sticky top-0 z-40 w-full px-6 py-4 flex items-center justify-between kinetic-shadow">
-        <Link to={authenticated ? "/home" : "/"} className="flex items-center gap-2 text-xl font-bold tracking-tighter text-[var(--color-on-surface)]">
-          <div className="w-8 h-8 rounded-lg bg-[var(--color-primary)] flex items-center justify-center text-white">
-            <i className="fa-solid fa-border-all text-[20px]"></i>
-          </div>
+        <Link to={authenticated ? "/home" : "/"} className="flex items-center gap-3 text-xl font-bold tracking-tighter text-[var(--color-on-surface)]">
+          <img src="/logo.png" alt="TaskFlow Logo" className="w-8 h-8 object-contain" />
           TaskFlow
         </Link>
 
