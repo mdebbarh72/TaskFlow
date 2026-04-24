@@ -25,9 +25,12 @@ const Landing = () => {
       
       {/* Hero Section */}
       <section className="mt-12 text-center max-w-3xl mx-auto flex flex-col items-center gap-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-full)] bg-[var(--color-secondary-container)] text-[var(--color-on-secondary-container)] text-xs font-semibold mb-2">
-          <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] animate-pulse"></span>
-          TaskFlow 2.0 is live
+        <div className="flex flex-col items-center gap-4">
+          <img src="/logo.png" alt="TaskFlow Logo" className="w-24 h-24 object-contain animate-pulse duration-[4000ms]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-[var(--radius-full)] bg-[var(--color-secondary-container)] text-[var(--color-on-secondary-container)] text-xs font-semibold mb-2">
+            <span className="w-2 h-2 rounded-full bg-[var(--color-primary)] animate-pulse"></span>
+            TaskFlow 2.0 is live
+          </div>
         </div>
         <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-[var(--color-on-surface)] leading-tight">
           The Kinetic <br /> Workspace.
@@ -50,7 +53,7 @@ const Landing = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((item, idx) => (
             <div key={idx} className="bg-[var(--color-surface-container-lowest)] p-8 rounded-[var(--radius-xl)] kinetic-shadow hover:-translate-y-1 transition-transform duration-300">
-              <div className="w-12 h-12 rounded-[var(--radius-lg)] bg-[var(--color-surface-container-low)] flex items-center justify-center mb-6">
+              <div className="mb-6">
                 {item.icon}
               </div>
               <h3 className="text-xl font-semibold text-[var(--color-on-surface)] mb-3">{item.title}</h3>

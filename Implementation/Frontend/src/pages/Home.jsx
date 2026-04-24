@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
-import api from '../api';
+import api from '../api.js';
 import Toast from '../components/Toast';
 import ProjectCard from '../components/ProjectCard';
 import { useNavigate } from 'react-router-dom';
@@ -74,9 +74,7 @@ const Home = () => {
 
         {projects.length === 0 ? (
           <div className="bg-[var(--color-surface-container-lowest)] border-2 border-dashed border-[var(--color-surface-container-high)] p-20 rounded-[var(--radius-2xl)] text-center flex flex-col items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-[var(--color-surface-container-low)] flex items-center justify-center mb-2">
-               <i className="fa-regular fa-folder text-[32px] text-[var(--color-outline)]"></i>
-            </div>
+            <i className="fa-regular fa-folder text-[64px] text-[var(--color-outline)] mb-2"></i>
             <h3 className="text-lg font-medium text-[var(--color-on-surface)]">No projects yet</h3>
             <p className="text-[var(--color-on-surface-variant)] max-w-sm">
               Your projects will appear here once you create them or get invited to join a team.

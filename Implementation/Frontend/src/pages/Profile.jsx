@@ -1,27 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/AuthContext';
-import Toast from '../components/Toast';
+import { toast } from 'react-hot-toast';
 
 const Profile = () => {
   const { user, updateProfile, isAdmin } = useAuth();
   const [formData, setFormData] = useState({
-    name: user?.name || '',
+    first_name: user?.first_name || '',
+    last_name: user?.last_name || '',
+    username: user?.profile?.username || '',
     email: user?.email || '',
   });
   const [loading, setLoading] = useState(false);
-  const [toast, setToast] = useState(null);
+
+  useEffect(() => {
+    setFormData({
+      first_name: user?.first_name || '',
+      last_name: user?.last_name || '',
+      username: user?.profile?.username || '',
+      email: user?.email || '',
+    });
+  }, [user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setToast(null);
+
 
     try {
       await updateProfile(formData);
-      setToast({ message: 'Profile updated successfully!', type: 'success' });
+      toast.success('Profile updated successfully!');
     } catch (error) {
       const msg = error.response?.data?.message || 'Failed to update profile.';
-      setToast({ message: msg, type: 'error' });
+      toast.error(msg);
     } finally {
       setLoading(false);
     }
@@ -41,13 +51,13 @@ const Profile = () => {
         <aside className="space-y-6">
           <div className="bg-[var(--color-surface-container-low)] p-8 rounded-[var(--radius-2xl)] text-center flex flex-col items-center">
              <div className="w-24 h-24 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-3xl font-bold mb-4 kinetic-shadow">
-               {user?.name.charAt(0)}
+               {user?.first_name?.charAt(0) || user?.name?.charAt(0)}
              </div>
              <h2 className="text-xl font-bold text-[var(--color-on-surface)]">{user?.name}</h2>
              <p className="text-[var(--color-on-surface-variant)] text-sm mb-4">{user?.email}</p>
              
              {isAdmin && (
-               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[var(--color-primary)] bg-opacity-10 text-[var(--color-primary)] text-xs font-bold uppercase tracking-wider">
+               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[var(--color-primary)] text-xs font-bold uppercase tracking-wider">
                  <i className="fa-solid fa-shield-halved text-[14px]"></i> Global Admin
                </span>
              )}
@@ -64,17 +74,50 @@ const Profile = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-sm font-medium text-[var(--color-on-surface)]" htmlFor="name">Full Name</label>
+                <label className="text-sm font-medium text-[var(--color-on-surface)]" htmlFor="first_name">First Name</label>
                 <div className="relative group">
                   <i className="fa-regular fa-user absolute left-3 top-3 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)] transition-colors text-[18px]"></i>
                   <input
-                    id="name"
+                    id="first_name"
                     type="text"
                     className="no-line-input pl-10"
-                    placeholder="Enter your full name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    placeholder="First name"
+                    value={formData.first_name}
+                    onChange={(e) => setFormData({...formData, first_name: e.target.value})}
+                    required
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-[var(--color-on-surface)]" htmlFor="last_name">Last Name</label>
+                <div className="relative group">
+                  <i className="fa-regular fa-user absolute left-3 top-3 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)] transition-colors text-[18px]"></i>
+                  <input
+                    id="last_name"
+                    type="text"
+                    className="no-line-input pl-10"
+                    placeholder="Last name"
+                    value={formData.last_name}
+                    onChange={(e) => setFormData({...formData, last_name: e.target.value})}
+                    required
+                  />
+                </div>
+              </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-[var(--color-on-surface)]" htmlFor="username">Username</label>
+                <div className="relative group">
+                  <i className="fa-regular fa-id-badge absolute left-3 top-3 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)] transition-colors text-[18px]"></i>
+                  <input
+                    id="username"
+                    type="text"
+                    className="no-line-input pl-10"
+                    placeholder="username"
+                    value={formData.username}
+                    onChange={(e) => setFormData({...formData, username: e.target.value})}
                     required
                   />
                 </div>
@@ -112,8 +155,6 @@ const Profile = () => {
         </main>
 
       </div>
-
-      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 };

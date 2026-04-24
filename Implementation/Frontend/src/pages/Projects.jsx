@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import api from '../api.js';
 import ProjectCard from '../components/ProjectCard';
 import ProjectForm from '../components/ProjectForm';
 import Modal from '../components/Modal';
-import Toast from '../components/Toast';
+import { toast } from 'react-hot-toast';
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [toast, setToast] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   
   // Modal states
@@ -61,10 +60,11 @@ const Projects = () => {
     try {
       await api.delete(`/projects/${projectToDelete.id}`);
       setProjects(prev => prev.filter(p => p.id !== projectToDelete.id));
-      setToast({ message: 'Project deleted successfully.', type: 'success' });
+      toast.success('Project deleted successfully.');
       setIsDeleteModalOpen(false);
     } catch (err) {
-      setToast({ message: 'Failed to delete project.', type: 'error' });
+      const msg = err.response?.data?.message || 'Failed to delete project.';
+      toast.error(msg);
     } finally {
       setIsDeleting(false);
       setProjectToDelete(null);
@@ -74,10 +74,10 @@ const Projects = () => {
   const handleFormSuccess = (updatedProject, action) => {
     if (action === 'created') {
       setProjects(prev => [updatedProject, ...prev]);
-      setToast({ message: 'Project created successfully!', type: 'success' });
+      toast.success('Project created successfully!');
     } else {
       setProjects(prev => prev.map(p => p.id === updatedProject.id ? updatedProject : p));
-      setToast({ message: 'Project updated successfully!', type: 'success' });
+      toast.success('Project updated successfully!');
     }
     setIsFormModalOpen(false);
   };
@@ -140,9 +140,7 @@ const Projects = () => {
         </div>
       ) : filteredProjects.length === 0 ? (
         <div className="bg-[var(--color-surface-container-lowest)] border-2 border-dashed border-[var(--color-surface-container-high)] p-20 rounded-[var(--radius-2xl)] text-center flex flex-col items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-[var(--color-surface-container-low)] flex items-center justify-center mb-2">
-             <i className="fa-regular fa-folder text-[32px] text-[var(--color-outline)]"></i>
-          </div>
+          <i className="fa-regular fa-folder text-[64px] text-[var(--color-outline)] mb-2"></i>
           <h3 className="text-lg font-medium text-[var(--color-on-surface)]">
             {searchTerm ? 'No projects match your search' : 'No projects yet'}
           </h3>
@@ -190,9 +188,7 @@ const Projects = () => {
       >
         <div className="space-y-6">
           <div className="p-4 rounded-xl bg-red-50 border border-red-100 flex gap-4">
-            <div className="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center shrink-0">
-              <i className="fa-solid fa-circle-exclamation text-[24px] text-red-600"></i>
-            </div>
+            <i className="fa-solid fa-triangle-exclamation text-[32px] text-red-600 mt-1 shrink-0"></i>
             <div>
               <h4 className="font-bold text-red-900">Are you absolutely sure?</h4>
               <p className="text-sm text-red-700 mt-1 leading-relaxed">
@@ -219,8 +215,6 @@ const Projects = () => {
           </div>
         </div>
       </Modal>
-
-      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
     </div>
   );
 };

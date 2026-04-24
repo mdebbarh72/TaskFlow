@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
-import api from '../api';
+import api from '../api.js';
 import Toast from '../components/Toast';
 
 const Admin = () => {
@@ -59,13 +59,13 @@ const Admin = () => {
   };
 
   const handleBanToggle = async (targetUser) => {
-    const action = targetUser.is_banned ? 'unban' : 'ban';
+    const action = targetUser.status === 'banned' ? 'unban' : 'ban';
     setActionLoading(targetUser.id);
 
     try {
       await api.patch(`/admin/users/${targetUser.id}/${action}`);
       setToast({
-        message: `${targetUser.name} has been ${action === 'ban' ? 'banned' : 'unbanned'}.`,
+        message: `${targetUser.first_name} ${targetUser.last_name} has been ${action === 'ban' ? 'banned' : 'unbanned'}.`,
         type: 'success',
       });
       await Promise.all([fetchStats(), fetchUsers()]);
@@ -114,7 +114,7 @@ const Admin = () => {
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {statCards.map((card) => (
           <div key={card.label} className="bg-[var(--color-surface-container-lowest)] p-6 rounded-[var(--radius-xl)] kinetic-shadow flex items-center gap-4">
-            <div className={`w-12 h-12 rounded-[var(--radius-lg)] ${card.bg} ${card.color} flex items-center justify-center`}>
+            <div className={`text-2xl ${card.color}`}>
               {card.icon}
             </div>
             <div>
@@ -147,8 +147,8 @@ const Admin = () => {
           </form>
         </div>
 
-        {/* Table */}
-        <div className="overflow-x-auto">
+        {/* Table/Desktop */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-[var(--color-surface-container)]">
@@ -173,9 +173,9 @@ const Admin = () => {
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-9 h-9 rounded-full bg-[var(--color-primary)] text-white flex items-center justify-center text-sm font-bold">
-                          {u.name.charAt(0).toUpperCase()}
+                          {(u.first_name || 'U').charAt(0).toUpperCase()}
                         </div>
-                        <span className="font-medium text-[var(--color-on-surface)]">{u.name}</span>
+                        <span className="font-medium text-[var(--color-on-surface)]">{u.first_name} {u.last_name}</span>
                       </div>
                     </td>
                     <td className="px-6 py-4 text-sm text-[var(--color-on-surface-variant)]">{u.email}</td>
@@ -190,7 +190,7 @@ const Admin = () => {
                       </span>
                     </td>
                     <td className="px-6 py-4">
-                      {u.is_banned ? (
+                      {u.status === 'banned' ? (
                         <span className="inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full bg-red-50 text-red-600">
                           <i className="fa-solid fa-ban text-[12px]"></i> Banned
                         </span>
@@ -209,13 +209,13 @@ const Admin = () => {
                           onClick={() => handleBanToggle(u)}
                           disabled={actionLoading === u.id}
                           className={`inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-[var(--radius-lg)] transition-colors ${
-                            u.is_banned
+                            u.status === 'banned'
                               ? 'bg-emerald-50 text-emerald-600 hover:bg-emerald-100'
                               : 'bg-red-50 text-red-600 hover:bg-red-100'
                           }`}
                         >
                           {actionLoading === u.id ? 'Loading...' : (
-                            u.is_banned 
+                            u.status === 'banned' 
                               ? <><i className="fa-solid fa-user-check text-[14px]"></i> Unban</> 
                               : <><i className="fa-solid fa-user-xmark text-[14px]"></i> Ban</>
                           )}
@@ -227,6 +227,41 @@ const Admin = () => {
               )}
             </tbody>
           </table>
+        </div>
+
+        {/* Mobile Cards */}
+        <div className="md:hidden p-4 space-y-3">
+          {users.length === 0 ? (
+            <div className="text-center text-sm text-[var(--color-on-surface-variant)] py-8">
+              No users found matching your search.
+            </div>
+          ) : (
+            users.map((u) => (
+              <div key={u.id} className="border border-[var(--color-surface-container)] rounded-xl p-4 bg-[var(--color-surface-container-low)]">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="font-semibold text-[var(--color-on-surface)]">{u.first_name} {u.last_name}</p>
+                    <p className="text-xs text-[var(--color-on-surface-variant)]">{u.email}</p>
+                  </div>
+                  <span className={`text-xs font-semibold px-2 py-1 rounded-full ${u.status === 'banned' ? 'bg-red-50 text-red-600' : 'bg-emerald-50 text-emerald-600'}`}>
+                    {u.status}
+                  </span>
+                </div>
+                <div className="mt-3 flex items-center justify-between">
+                  <span className="text-xs text-[var(--color-on-surface-variant)]">{u.role}</span>
+                  {u.role !== 'admin' && u.id !== user?.id && (
+                    <button
+                      onClick={() => handleBanToggle(u)}
+                      disabled={actionLoading === u.id}
+                      className={`text-xs font-semibold px-3 py-1.5 rounded-lg ${u.status === 'banned' ? 'bg-emerald-50 text-emerald-600' : 'bg-red-50 text-red-600'}`}
+                    >
+                      {u.status === 'banned' ? 'Unban' : 'Ban'}
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Pagination */}

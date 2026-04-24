@@ -2,45 +2,46 @@ import React from 'react';
 
 const AboutUs = () => {
   return (
-    <div className="max-w-4xl mx-auto py-12">
+    <div className="max-w-4xl mx-auto py-12 px-6">
       <div className="text-center mb-16 animate-in fade-in slide-in-from-bottom-4">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-[var(--color-on-surface)] mb-4">
-          Our Philosophy
+          Empowering Teams to Build the Future
         </h1>
-        <p className="text-lg text-[var(--color-on-surface-variant)] max-w-2xl mx-auto">
-          We set out to build a platform that doesn't just manage tasks, but rather elevates the way teams interact with their work.
+        <p className="text-lg text-[var(--color-on-surface-variant)] max-w-2xl mx-auto leading-relaxed">
+          TaskFlow is built for high-performance teams who refuse to settle for average. We provide the clarity and structure you need to plan, track, and ship world-class software.
         </p>
       </div>
 
       <div className="space-y-16">
         <div className="flex flex-col md:flex-row gap-12 items-center">
           <div className="flex-1 space-y-5">
-            <h2 className="text-2xl font-semibold text-[var(--color-on-surface)]">The "No-Line" Rule</h2>
+            <h2 className="text-2xl font-bold text-[var(--color-on-surface)]">Built for Agile Velocity</h2>
             <p className="text-[var(--color-on-surface-variant)] leading-relaxed">
-              We fundamentally reject the "spreadsheet-as-software" aesthetic. In our workspace, every element breathes. By entirely eliminating 1px solid borders for sectioning, we rely on subtle tonal shifts between `surface` and `surface-container-low` to define boundaries cleanly and organically. You feel the architecture without seeing the walls.
+              Whether you're running two-week sprints or managing a continuous flow Kanban board, TaskFlow adapts to your team's rhythm. Break down complex epics into actionable tasks, manage dependencies, and monitor your team's progress with real-time analytics and intuitive boards.
             </p>
           </div>
-          <div className="flex-1 bg-[var(--color-surface-container-lowest)] p-8 rounded-[var(--radius-2xl)] kinetic-shadow min-h-[250px] flex items-center justify-center">
-            {/* Visual Representation */}
-            <div className="w-full flex gap-4">
-              <div className="w-1/3 bg-[var(--color-surface-container-low)] h-32 rounded-[var(--radius-lg)]"></div>
-              <div className="w-2/3 bg-[var(--color-surface-bright)] h-32 rounded-[var(--radius-lg)] shadow-sm"></div>
-            </div>
+          <div className="flex-1 bg-[var(--color-surface-container-lowest)] p-2 rounded-[var(--radius-2xl)] kinetic-shadow min-h-[250px] flex items-center justify-center overflow-hidden">
+            <img 
+              src="/images/about/agile_board.png" 
+              alt="Agile Board Interface" 
+              className="w-full h-full object-cover rounded-[var(--radius-xl)]"
+            />
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row-reverse gap-12 items-center">
           <div className="flex-1 space-y-5">
-            <h2 className="text-2xl font-semibold text-[var(--color-on-surface)]">Glass & Gradient</h2>
+            <h2 className="text-2xl font-bold text-[var(--color-on-surface)]">Seamless Collaboration</h2>
             <p className="text-[var(--color-on-surface-variant)] leading-relaxed">
-              For primary actions and floating contexts, we deploy "Glassmorphism" combined with signature "Action Blue" gradients. It gives our most critical interactions a sort of "soul" that flat HEX colors simply cannot replicate. 
+              Software development is a team sport. TaskFlow keeps everyone in the loop with integrated commenting, detailed activity logs, and instant notifications. From developers to product owners, ensure every voice is heard and every decision is documented right where the work happens.
             </p>
           </div>
-          <div className="flex-1 w-full bg-gradient-to-br from-[#dfe1f2] to-[#f2f4f6] p-8 rounded-[var(--radius-2xl)] min-h-[250px] flex items-center justify-center relative overflow-hidden">
-            <div className="absolute inset-0 opacity-50 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
-            <div className="relative glass p-6 rounded-[var(--radius-xl)] w-3/4 text-center kinetic-shadow">
-              <button className="btn-primary w-full">Floating Action</button>
-            </div>
+          <div className="flex-1 w-full bg-[var(--color-surface-container-lowest)] p-2 rounded-[var(--radius-2xl)] min-h-[250px] flex items-center justify-center relative overflow-hidden kinetic-shadow">
+             <img 
+              src="/images/about/collaboration.png" 
+              alt="Team Collaboration Interface" 
+              className="w-full h-full object-cover rounded-[var(--radius-xl)]"
+            />
           </div>
         </div>
       </div>

@@ -47,6 +47,10 @@ const Login = () => {
         msg = error.response.data.message;
       }
 
+      if (msg.toLowerCase().includes('banned')) {
+        navigate('/banned');
+      }
+
       setToast({ message: msg, type: 'error' });
     } finally {
       setLoading(false);
@@ -103,7 +107,7 @@ const Login = () => {
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium text-[var(--color-on-surface)]" htmlFor="password">Password</label>
-          <Link to="#" className="text-xs text-[var(--color-primary)] hover:underline font-medium">Forgot password?</Link>
+          <Link to="/forgot-password" className="text-xs text-[var(--color-primary)] hover:underline font-medium">Forgot password?</Link>
         </div>
         <div className="relative group">
           <i className="fa-solid fa-lock absolute left-3 top-3 text-[var(--color-outline)] group-focus-within:text-[var(--color-primary)] transition-colors text-[18px]"></i>
@@ -179,14 +183,12 @@ const Login = () => {
   );
 
   return (
-    <div className="flex-1 flex flex-col items-center justify-center -mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="flex-1 flex flex-col items-center justify-center -mt-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
       
       <div className="w-full max-w-md bg-[var(--color-surface-container-lowest)] p-10 rounded-[var(--radius-2xl)] kinetic-shadow">
         {step === 'login' && (
           <div className="text-center mb-10 overflow-hidden">
-            <div className="inline-flex w-12 h-12 rounded-xl bg-[var(--color-primary)] bg-opacity-10 text-[var(--color-primary)] items-center justify-center mb-4">
-               <i className="fa-solid fa-border-all text-[28px]"></i>
-            </div>
+            <img src="/logo.png" alt="TaskFlow Logo" className="w-16 h-16 mx-auto mb-4 object-contain" />
             <h1 className="text-3xl font-bold tracking-tight text-[var(--color-on-surface)]">Welcome back</h1>
             <p className="text-[var(--color-on-surface-variant)] mt-2">Sign in to your kinetic workspace.</p>
           </div>

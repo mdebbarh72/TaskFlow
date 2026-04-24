@@ -46,9 +46,7 @@ const Signup = () => {
       
       <div className="w-full max-w-md bg-[var(--color-surface-container-lowest)] p-10 rounded-[var(--radius-2xl)] kinetic-shadow">
         <div className="text-center mb-10">
-          <div className="inline-flex w-12 h-12 rounded-xl bg-[var(--color-primary)] bg-opacity-10 text-[var(--color-primary)] items-center justify-center mb-4">
-             <i className="fa-solid fa-border-all text-[28px]"></i>
-          </div>
+          <img src="/logo.png" alt="TaskFlow Logo" className="w-16 h-16 mx-auto mb-4 object-contain" />
           <h1 className="text-3xl font-bold tracking-tight text-[var(--color-on-surface)]">Join the motion</h1>
           <p className="text-[var(--color-on-surface-variant)] mt-2">Start for free and experience the kinetic workspace.</p>
         </div>
