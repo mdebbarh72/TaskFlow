@@ -1,0 +1,154 @@
+{
+  "projects": [
+    {
+      "name": "TaskFlow",
+      "key": "TF2PFR",
+      "issues": [
+        {
+          "externalId": "MAQ-EPIC-1",
+          "summary": "EPIC: Recherche UX et Wireframing",
+          "issueType": "Epic",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-04-15T09:00:00.000+0100",
+          "dueDate": "2026-04-20T17:00:00.000+0100",
+          "description": "Conception de l'architecture de l'information et wireframes basse fidélité.",
+          "labels": ["Sprint-2-Maquettage"]
+        },
+        {
+          "externalId": "MAQ-US-1",
+          "summary": "Story: Architecture de la Navigation",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-04-15T09:00:00.000+0100",
+          "dueDate": "2026-04-17T17:00:00.000+0100",
+          "description": "En tant qu'UX Designer, je veux structurer le menu latéral et le header.",
+          "labels": ["Sprint-2-Maquettage", "Epic-MAQ-1"]
+        },
+        {
+          "externalId": "MAQ-ST-1-1",
+          "summary": "Task: Wireframe de la Sidebar (Projets & Équipes)",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-04-15T09:00:00.000+0100",
+          "dueDate": "2026-04-16T17:00:00.000+0100",
+          "description": "Design du menu de navigation principal.",
+          "labels": ["Sprint-2-Maquettage", "Sub-task-of-MAQ-US-1"]
+        },
+        {
+          "externalId": "MAQ-US-2",
+          "summary": "Story: Wireframes Dashboard & Kanban",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-04-18T09:00:00.000+0100",
+          "dueDate": "2026-04-20T17:00:00.000+0100",
+          "description": "En tant qu'UX Designer, je veux schématiser l'interface du tableau Kanban.",
+          "labels": ["Sprint-2-Maquettage", "Epic-MAQ-1"]
+        },
+        {
+          "externalId": "MAQ-ST-2-1",
+          "summary": "Task: Sketche de la vue Projet Kanban",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-18T09:00:00.000+0100",
+          "dueDate": "2026-04-19T17:00:00.000+0100",
+          "description": "Structure des colonnes, bouton Add Task, Layout principal.",
+          "labels": ["Sprint-2-Maquettage", "Sub-task-of-MAQ-US-2"]
+        },
+        {
+          "externalId": "MAQ-EPIC-2",
+          "summary": "EPIC: Design System et UI Haute Fidélité",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT60H",
+          "created": "2026-04-21T09:00:00.000+0100",
+          "dueDate": "2026-04-28T17:00:00.000+0100",
+          "description": "Création de l'UI Kit complet et application aux écrans finaux.",
+          "labels": ["Sprint-2-Maquettage"]
+        },
+        {
+          "externalId": "MAQ-US-3",
+          "summary": "Story: Création du Design System (Tokens)",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-04-21T09:00:00.000+0100",
+          "dueDate": "2026-04-23T17:00:00.000+0100",
+          "description": "En tant qu'UI Designer, je veux définir la typographie et les couleurs.",
+          "labels": ["Sprint-2-Maquettage", "Epic-MAQ-2"]
+        },
+        {
+          "externalId": "MAQ-ST-3-1",
+          "summary": "Task: Définir la palette Glassmorphism et les ombres",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-21T09:00:00.000+0100",
+          "dueDate": "2026-04-22T17:00:00.000+0100",
+          "description": "Variables de couleurs, effet de verre (blur), gradients.",
+          "labels": ["Sprint-2-Maquettage", "Sub-task-of-MAQ-US-3"]
+        },
+        {
+          "externalId": "MAQ-US-4",
+          "summary": "Story: Maquettage UI de Gestion de Projet",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT36H",
+          "created": "2026-04-24T09:00:00.000+0100",
+          "dueDate": "2026-04-28T17:00:00.000+0100",
+          "description": "En tant qu'UI Designer, je veux designer les vues finales de gestion de projet.",
+          "labels": ["Sprint-2-Maquettage", "Epic-MAQ-2"]
+        },
+        {
+          "externalId": "MAQ-ST-4-1",
+          "summary": "Task: Design du Dashboard Projets",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-24T09:00:00.000+0100",
+          "dueDate": "2026-04-25T17:00:00.000+0100",
+          "description": "Vue avec la grille de cartes de projets.",
+          "labels": ["Sprint-2-Maquettage", "Sub-task-of-MAQ-US-4"]
+        },
+        {
+          "externalId": "MAQ-ST-4-2",
+          "summary": "Task: Design de la Modale Création/Paramètres Projet",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-04-26T09:00:00.000+0100",
+          "dueDate": "2026-04-27T17:00:00.000+0100",
+          "description": "Formulaire d'ajout de projet et gestion des membres.",
+          "labels": ["Sprint-2-Maquettage", "Sub-task-of-MAQ-US-4"]
+        },
+        {
+          "externalId": "MAQ-ST-4-3",
+          "summary": "Task: Design du Board Kanban Haute Fidélité",
+          "issueType": "Task",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-04-27T09:00:00.000+0100",
+          "dueDate": "2026-04-28T17:00:00.000+0100",
+          "description": "Design parfait au pixel des colonnes et des tickets.",
+          "labels": ["Sprint-2-Maquettage", "Sub-task-of-MAQ-US-4"]
+        }
+      ]
+    }
+  ]
+}

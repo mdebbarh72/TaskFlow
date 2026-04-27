@@ -1,0 +1,154 @@
+{
+  "projects": [
+    {
+      "name": "TaskFlow",
+      "key": "TF2PFR",
+      "issues": [
+        {
+          "externalId": "CONC-EPIC-1",
+          "summary": "EPIC: Spécifications Fonctionnelles et Métier",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-04-01T09:00:00.000+0100",
+          "dueDate": "2026-04-05T17:00:00.000+0100",
+          "description": "Définition précise des besoins du projet, des utilisateurs cibles et des interactions avec le système.\n\n**Critères d'acceptation :**\n- Les documents de spécifications sont validés.\n- Les cas d'utilisation sont modélisés.\n\n**Definition of Done (DoD) :**\n- Validation client ou Product Owner.",
+          "labels": ["Sprint-1-Conception"]
+        },
+        {
+          "externalId": "CONC-US-1",
+          "summary": "Story: Définition des Personas et Parcours",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-04-01T09:00:00.000+0100",
+          "dueDate": "2026-04-03T17:00:00.000+0100",
+          "description": "En tant que PO, je veux définir les profils utilisateurs (Personas) pour adapter l'application à leurs besoins.\n\n**Definition of Done (DoD) :**\n- Document des Personas rédigé.",
+          "labels": ["Sprint-1-Conception", "Epic-CONC-1"]
+        },
+        {
+          "externalId": "CONC-ST-1-1",
+          "summary": "Task: Animer l'atelier User Journey",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-04-01T09:00:00.000+0100",
+          "dueDate": "2026-04-02T17:00:00.000+0100",
+          "description": "Organiser un atelier pour tracer le parcours type d'un utilisateur.",
+          "labels": ["Sprint-1-Conception", "Sub-task-of-CONC-US-1"]
+        },
+        {
+          "externalId": "CONC-US-2",
+          "summary": "Story: Modélisation UML des Cas d'Utilisation",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-04-03T09:00:00.000+0100",
+          "dueDate": "2026-04-05T17:00:00.000+0100",
+          "description": "En tant qu'analyste, je veux créer le diagramme de cas d'utilisation.",
+          "labels": ["Sprint-1-Conception", "Epic-CONC-1"]
+        },
+        {
+          "externalId": "CONC-ST-2-1",
+          "summary": "Task: Dessiner le diagramme Use Case Global",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-03T09:00:00.000+0100",
+          "dueDate": "2026-04-04T17:00:00.000+0100",
+          "description": "Créer le diagramme avec PlantUML ou Lucidchart.",
+          "labels": ["Sprint-1-Conception", "Sub-task-of-CONC-US-2"]
+        },
+        {
+          "externalId": "CONC-EPIC-2",
+          "summary": "EPIC: Architecture Base de Données & Logicielle",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT60H",
+          "created": "2026-04-06T09:00:00.000+0100",
+          "dueDate": "2026-04-14T17:00:00.000+0100",
+          "description": "Conception technique du système (DB, API, Modèles).",
+          "labels": ["Sprint-1-Conception"]
+        },
+        {
+          "externalId": "CONC-US-3",
+          "summary": "Story: Diagramme Entité-Association (ERD)",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-04-06T09:00:00.000+0100",
+          "dueDate": "2026-04-09T17:00:00.000+0100",
+          "description": "En tant que DBA, je veux modéliser la base de données PostgreSQL.",
+          "labels": ["Sprint-1-Conception", "Epic-CONC-2"]
+        },
+        {
+          "externalId": "CONC-ST-3-1",
+          "summary": "Task: Modéliser le schéma Auth et Projets",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-06T09:00:00.000+0100",
+          "dueDate": "2026-04-07T17:00:00.000+0100",
+          "description": "Tables Users, Projects, Project_User.",
+          "labels": ["Sprint-1-Conception", "Sub-task-of-CONC-US-3"]
+        },
+        {
+          "externalId": "CONC-ST-3-2",
+          "summary": "Task: Modéliser le schéma Kanban",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-08T09:00:00.000+0100",
+          "dueDate": "2026-04-09T17:00:00.000+0100",
+          "description": "Tables Boards, Columns, Tasks, Comments.",
+          "labels": ["Sprint-1-Conception", "Sub-task-of-CONC-US-3"]
+        },
+        {
+          "externalId": "CONC-US-4",
+          "summary": "Story: Spécification des APIs (Swagger)",
+          "issueType": "Story",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-04-10T09:00:00.000+0100",
+          "dueDate": "2026-04-14T17:00:00.000+0100",
+          "description": "En tant qu'architecte, je veux documenter les endpoints REST.",
+          "labels": ["Sprint-1-Conception", "Epic-CONC-2"]
+        },
+        {
+          "externalId": "CONC-ST-4-1",
+          "summary": "Task: Rédiger l'OpenAPI Auth & Projects",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-10T09:00:00.000+0100",
+          "dueDate": "2026-04-12T17:00:00.000+0100",
+          "description": "Documenter /login, /register, /projects",
+          "labels": ["Sprint-1-Conception", "Sub-task-of-CONC-US-4"]
+        },
+        {
+          "externalId": "CONC-ST-4-2",
+          "summary": "Task: Rédiger l'OpenAPI Kanban",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-04-13T09:00:00.000+0100",
+          "dueDate": "2026-04-14T17:00:00.000+0100",
+          "description": "Documenter /tasks, /columns et drag/drop payloads",
+          "labels": ["Sprint-1-Conception", "Sub-task-of-CONC-US-4"]
+        }
+      ]
+    }
+  ]
+}
