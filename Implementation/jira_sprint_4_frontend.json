@@ -1,0 +1,250 @@
+{
+  "projects": [
+    {
+      "name": "TaskFlow",
+      "key": "TF2PFR",
+      "issues": [
+        {
+          "externalId": "FRONT-EPIC-1",
+          "summary": "EPIC: Socle React & Authentification Visuelle",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-05-13T09:00:00.000+0100",
+          "dueDate": "2026-05-16T17:00:00.000+0100",
+          "description": "Initialisation du projet Frontend, du store global et des écrans d'authentification.",
+          "labels": ["Sprint-4-Frontend"]
+        },
+        {
+          "externalId": "FRONT-US-1",
+          "summary": "Story: Installation et Setup de l'Environnement",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-13T09:00:00.000+0100",
+          "dueDate": "2026-05-14T17:00:00.000+0100",
+          "description": "En tant que Tech Lead Frontend, je veux configurer Vite, React 19, et TailwindCSS.",
+          "labels": ["Sprint-4-Frontend", "Epic-FRONT-1"]
+        },
+        {
+          "externalId": "FRONT-ST-1-1",
+          "summary": "Task: Installation React Router et Zustand",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-13T09:00:00.000+0100",
+          "dueDate": "2026-05-13T17:00:00.000+0100",
+          "description": "Structure des dossiers et dépendances.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-1"]
+        },
+        {
+          "externalId": "FRONT-US-2",
+          "summary": "Story: Pages d'Inscription, Login et 2FA",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-14T09:00:00.000+0100",
+          "dueDate": "2026-05-16T17:00:00.000+0100",
+          "description": "En tant que dev Frontend, je veux développer les formulaires et les lier à l'API Auth.",
+          "labels": ["Sprint-4-Frontend", "Epic-FRONT-1"]
+        },
+        {
+          "externalId": "FRONT-ST-2-1",
+          "summary": "Task: Formulaire Login avec React Hook Form",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-05-14T09:00:00.000+0100",
+          "dueDate": "2026-05-15T17:00:00.000+0100",
+          "description": "Validation côté client et appel Axios (Gestion d'erreur 422).",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-2"]
+        },
+        {
+          "externalId": "FRONT-ST-2-2",
+          "summary": "Task: Écran OTP (2FA) et stockage JWT",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-05-16T09:00:00.000+0100",
+          "dueDate": "2026-05-16T17:00:00.000+0100",
+          "description": "Saisie du code OTP à 6 chiffres et persistance du token JWT.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-2"]
+        },
+        {
+          "externalId": "FRONT-EPIC-2",
+          "summary": "EPIC: Interface de Gestion des Projets",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-05-17T09:00:00.000+0100",
+          "dueDate": "2026-05-20T17:00:00.000+0100",
+          "description": "Développement des vues complexes pour la gestion des espaces de travail et des équipes de projet.",
+          "labels": ["Sprint-4-Frontend"]
+        },
+        {
+          "externalId": "FRONT-US-3",
+          "summary": "Story: Vue Dashboard Principal (Liste des projets)",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-17T09:00:00.000+0100",
+          "dueDate": "2026-05-18T17:00:00.000+0100",
+          "description": "En tant qu'utilisateur, je veux voir la liste de tous mes projets au format grille.",
+          "labels": ["Sprint-4-Frontend", "Epic-FRONT-2"]
+        },
+        {
+          "externalId": "FRONT-ST-3-1",
+          "summary": "Task: Intégration Layout Principal (Sidebar/Header)",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-17T09:00:00.000+0100",
+          "dueDate": "2026-05-17T17:00:00.000+0100",
+          "description": "Structure de la navigation partagée entre toutes les vues sécurisées.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-3"]
+        },
+        {
+          "externalId": "FRONT-ST-3-2",
+          "summary": "Task: Composants ProjectCard et Skeletons de chargement",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-18T09:00:00.000+0100",
+          "dueDate": "2026-05-18T17:00:00.000+0100",
+          "description": "Appel API `GET /projects` et affichage avec design Glassmorphism.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-3"]
+        },
+        {
+          "externalId": "FRONT-US-4",
+          "summary": "Story: Création et Paramètres du Projet (Équipe)",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-19T09:00:00.000+0100",
+          "dueDate": "2026-05-20T17:00:00.000+0100",
+          "description": "En tant qu'utilisateur, je veux pouvoir créer un projet et inviter des collaborateurs.",
+          "labels": ["Sprint-4-Frontend", "Epic-FRONT-2"]
+        },
+        {
+          "externalId": "FRONT-ST-4-1",
+          "summary": "Task: Modale de Création de Projet",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-19T09:00:00.000+0100",
+          "dueDate": "2026-05-19T17:00:00.000+0100",
+          "description": "Formulaire `POST /projects` interactif.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-4"]
+        },
+        {
+          "externalId": "FRONT-ST-4-2",
+          "summary": "Task: Vue Paramètres et Invitation de Membres",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-20T09:00:00.000+0100",
+          "dueDate": "2026-05-20T17:00:00.000+0100",
+          "description": "Liste des membres, gestion des rôles et input pour inviter par Email.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-4"]
+        },
+        {
+          "externalId": "FRONT-EPIC-3",
+          "summary": "EPIC: Tableau Kanban Intéractif (Drag&Drop)",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT48H",
+          "created": "2026-05-21T09:00:00.000+0100",
+          "dueDate": "2026-05-26T17:00:00.000+0100",
+          "description": "La vue principale au cœur de l'application gérant les flux de tâches.",
+          "labels": ["Sprint-4-Frontend"]
+        },
+        {
+          "externalId": "FRONT-US-5",
+          "summary": "Story: Affichage du Kanban et des Tâches",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-21T09:00:00.000+0100",
+          "dueDate": "2026-05-23T17:00:00.000+0100",
+          "description": "En tant qu'utilisateur, je veux visualiser le Board avec ses colonnes et ses cartes.",
+          "labels": ["Sprint-4-Frontend", "Epic-FRONT-3"]
+        },
+        {
+          "externalId": "FRONT-ST-5-1",
+          "summary": "Task: Rendu dynamique des colonnes (Columns)",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-21T09:00:00.000+0100",
+          "dueDate": "2026-05-21T17:00:00.000+0100",
+          "description": "Itération sur les données API pour créer le layout horizontal scrollable.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-5"]
+        },
+        {
+          "externalId": "FRONT-ST-5-2",
+          "summary": "Task: Composant TaskCard (Carte Tâche)",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-22T09:00:00.000+0100",
+          "dueDate": "2026-05-23T17:00:00.000+0100",
+          "description": "Design de la carte avec avatars, labels, titre et indicateur d'échéance.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-5"]
+        },
+        {
+          "externalId": "FRONT-US-6",
+          "summary": "Story: Mécanique de Drag-and-Drop",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-24T09:00:00.000+0100",
+          "dueDate": "2026-05-26T17:00:00.000+0100",
+          "description": "En tant qu'utilisateur, je veux déplacer mes tâches librement.",
+          "labels": ["Sprint-4-Frontend", "Epic-FRONT-3"]
+        },
+        {
+          "externalId": "FRONT-ST-6-1",
+          "summary": "Task: Intégration de dnd-kit",
+          "issueType": "Task",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-05-24T09:00:00.000+0100",
+          "dueDate": "2026-05-25T17:00:00.000+0100",
+          "description": "Mise en place des Droppable et Draggable contextes.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-6"]
+        },
+        {
+          "externalId": "FRONT-ST-6-2",
+          "summary": "Task: Synchronisation API silencieuse",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-05-26T09:00:00.000+0100",
+          "dueDate": "2026-05-26T17:00:00.000+0100",
+          "description": "Mise à jour optimiste de l'UI et appel `PATCH` en arrière-plan.",
+          "labels": ["Sprint-4-Frontend", "Sub-task-of-FRONT-US-6"]
+        }
+      ]
+    }
+  ]
+}

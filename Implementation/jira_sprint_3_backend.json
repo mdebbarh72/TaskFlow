@@ -1,0 +1,238 @@
+{
+  "projects": [
+    {
+      "name": "TaskFlow",
+      "key": "TF2PFR",
+      "issues": [
+        {
+          "externalId": "BACK-EPIC-1",
+          "summary": "EPIC: Core Backend & API Authentification",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-04-29T09:00:00.000+0100",
+          "dueDate": "2026-05-03T17:00:00.000+0100",
+          "description": "Mise en place de l'infrastructure Laravel et du système d'authentification robuste (JWT + 2FA).",
+          "labels": ["Sprint-3-Backend"]
+        },
+        {
+          "externalId": "BACK-US-1",
+          "summary": "Story: Configuration Serveur & CI/CD",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-04-29T09:00:00.000+0100",
+          "dueDate": "2026-04-30T17:00:00.000+0100",
+          "description": "En tant que Devops, je veux configurer l'environnement Laravel et la BDD PostgreSQL.",
+          "labels": ["Sprint-3-Backend", "Epic-BACK-1"]
+        },
+        {
+          "externalId": "BACK-ST-1-1",
+          "summary": "Task: Setup Laravel 11 et Base de Données",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-04-29T09:00:00.000+0100",
+          "dueDate": "2026-04-29T17:00:00.000+0100",
+          "description": "Installation, configuration `.env` et tests de connexion DB.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-1"]
+        },
+        {
+          "externalId": "BACK-US-2",
+          "summary": "Story: Système d'Authentification avec 2FA",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-01T09:00:00.000+0100",
+          "dueDate": "2026-05-03T17:00:00.000+0100",
+          "description": "En tant que Développeur Backend, je veux implémenter l'inscription, le login et le flux OTP par email.",
+          "labels": ["Sprint-3-Backend", "Epic-BACK-1"]
+        },
+        {
+          "externalId": "BACK-ST-2-1",
+          "summary": "Task: Implémenter l'API Register & Login (Sanctum)",
+          "issueType": "Task",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-05-01T09:00:00.000+0100",
+          "dueDate": "2026-05-02T17:00:00.000+0100",
+          "description": "Controllers Auth et génération des tokens.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-2"]
+        },
+        {
+          "externalId": "BACK-ST-2-2",
+          "summary": "Task: Service d'envoi OTP et table Known_IPs",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT12H",
+          "created": "2026-05-02T09:00:00.000+0100",
+          "dueDate": "2026-05-03T17:00:00.000+0100",
+          "description": "Génération de code à 6 chiffres, intégration Mail, et vérification IP.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-2"]
+        },
+        {
+          "externalId": "BACK-EPIC-2",
+          "summary": "EPIC: API de Gestion de Projets & Équipes",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-05-04T09:00:00.000+0100",
+          "dueDate": "2026-05-07T17:00:00.000+0100",
+          "description": "L'API cœur gérant la vue Projet, la création, la modification, et la gestion des droits des membres du projet.",
+          "labels": ["Sprint-3-Backend"]
+        },
+        {
+          "externalId": "BACK-US-3",
+          "summary": "Story: CRUD des Projets",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-04T09:00:00.000+0100",
+          "dueDate": "2026-05-05T17:00:00.000+0100",
+          "description": "En tant que Dev Backend, je veux fournir les routes permettant la manipulation des projets.",
+          "labels": ["Sprint-3-Backend", "Epic-BACK-2"]
+        },
+        {
+          "externalId": "BACK-ST-3-1",
+          "summary": "Task: Modèle, Migration et Form Requests Project",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT6H",
+          "created": "2026-05-04T09:00:00.000+0100",
+          "dueDate": "2026-05-04T17:00:00.000+0100",
+          "description": "Table projects et validation des données d'entrée.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-3"]
+        },
+        {
+          "externalId": "BACK-ST-3-2",
+          "summary": "Task: ProjectController (Index, Store, Show, Update, Destroy)",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT10H",
+          "created": "2026-05-05T09:00:00.000+0100",
+          "dueDate": "2026-05-05T17:00:00.000+0100",
+          "description": "Implémentation complète des méthodes REST.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-3"]
+        },
+        {
+          "externalId": "BACK-US-4",
+          "summary": "Story: Gestion des Membres d'un Projet",
+          "issueType": "Story",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-06T09:00:00.000+0100",
+          "dueDate": "2026-05-07T17:00:00.000+0100",
+          "description": "En tant que Backend Dev, je veux permettre l'invitation d'utilisateurs et définir leurs rôles au sein d'un projet.",
+          "labels": ["Sprint-3-Backend", "Epic-BACK-2"]
+        },
+        {
+          "externalId": "BACK-ST-4-1",
+          "summary": "Task: Table pivot project_user et relations Eloquent",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-06T09:00:00.000+0100",
+          "dueDate": "2026-05-06T17:00:00.000+0100",
+          "description": "Gérer les relations Many-to-Many entre Users et Projects.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-4"]
+        },
+        {
+          "externalId": "BACK-ST-4-2",
+          "summary": "Task: Endpoints /projects/{id}/members (Invite/Remove)",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-07T09:00:00.000+0100",
+          "dueDate": "2026-05-07T17:00:00.000+0100",
+          "description": "Ajouter un membre via email, vérifier les droits (Admin vs Member).",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-4"]
+        },
+        {
+          "externalId": "BACK-EPIC-3",
+          "summary": "EPIC: Moteur du Kanban & Tâches (Backend)",
+          "issueType": "Epic",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT40H",
+          "created": "2026-05-08T09:00:00.000+0100",
+          "dueDate": "2026-05-12T17:00:00.000+0100",
+          "description": "Logique complexe de manipulation des tâches (ordre, statut, assignation).",
+          "labels": ["Sprint-3-Backend"]
+        },
+        {
+          "externalId": "BACK-US-5",
+          "summary": "Story: CRUD des Tâches et Assignation",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT24H",
+          "created": "2026-05-08T09:00:00.000+0100",
+          "dueDate": "2026-05-10T17:00:00.000+0100",
+          "description": "En tant que Dev Backend, je veux une API pour créer, lire, updater et supprimer des tâches.",
+          "labels": ["Sprint-3-Backend", "Epic-BACK-3"]
+        },
+        {
+          "externalId": "BACK-ST-5-1",
+          "summary": "Task: Migration et Modèle Task (Description, Dates, Priorité)",
+          "issueType": "Task",
+          "priority": "Medium",
+          "status": "To Do",
+          "originalEstimate": "PT8H",
+          "created": "2026-05-08T09:00:00.000+0100",
+          "dueDate": "2026-05-09T17:00:00.000+0100",
+          "description": "Table tasks complète.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-5"]
+        },
+        {
+          "externalId": "BACK-ST-5-2",
+          "summary": "Task: Endpoint de création et assignation d'utilisateur",
+          "issueType": "Task",
+          "priority": "High",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-09T09:00:00.000+0100",
+          "dueDate": "2026-05-10T17:00:00.000+0100",
+          "description": "S'assurer qu'un utilisateur assigné est bien membre du projet.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-5"]
+        },
+        {
+          "externalId": "BACK-US-6",
+          "summary": "Story: Mécanique de Drag-and-Drop (Ordre et Colonnes)",
+          "issueType": "Story",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-11T09:00:00.000+0100",
+          "dueDate": "2026-05-12T17:00:00.000+0100",
+          "description": "En tant que Dev Backend, je veux gérer la logique de réordonnancement suite à un Drag&Drop côté frontend.",
+          "labels": ["Sprint-3-Backend", "Epic-BACK-3"]
+        },
+        {
+          "externalId": "BACK-ST-6-1",
+          "summary": "Task: Endpoint PATCH /tasks/{id}/move",
+          "issueType": "Task",
+          "priority": "Highest",
+          "status": "To Do",
+          "originalEstimate": "PT16H",
+          "created": "2026-05-11T09:00:00.000+0100",
+          "dueDate": "2026-05-12T17:00:00.000+0100",
+          "description": "Logique mettant à jour la `column_id` et la `position` (ordre) d'une tâche de façon optimisée.",
+          "labels": ["Sprint-3-Backend", "Sub-task-of-BACK-US-6"]
+        }
+      ]
+    }
+  ]
+}
