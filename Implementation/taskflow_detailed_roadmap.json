@@ -1,0 +1,73 @@
+{
+  "projects": [
+    {
+      "name": "TaskFlow",
+      "key": "TF2PFR",
+      "issues": [
+        {
+          "summary": "EPIC: Foundations & Infrastructure",
+          "issueType": "Epic",
+          "priority": "High",
+          "description": "Establish the technical core (Laravel 13, React 19, PostgreSQL). Goal: High-performance architecture.\n\n**Dates**: March 15 - March 25",
+          "customFieldValues": [{ "fieldName": "Epic Name", "value": "Foundations" }]
+        },
+        {
+          "summary": "Story: Core Environment Orchestration",
+          "issueType": "Story",
+          "priority": "High",
+          "description": "As a developer, I want a robust PostgreSQL/Laravel foundation.\n\n**Acceptance Criteria:**\n- Modular structure (Domain-Driven Design)\n- PostgreSQL DB Migrations tested\n- Vite/Tailwind 4 custom configuration\n\n**Definition of Done:**\n- 100% baseline API coverage\n- Environment variables documented.",
+          "customFieldValues": [{ "fieldName": "Epic Link", "value": "Foundations" }]
+        },
+        {
+          "summary": "Story: Kinetic Design System Architecture",
+          "issueType": "Story",
+          "priority": "Medium",
+          "description": "As a designer/dev, I want a glassmorphic UI.\n\n**Acceptance Criteria:**\n- HSL color tokens defined\n- Kinetic shadows implemented\n- Global Typography set\n\n**Definition of Done:**\n- Global style guide implemented in CSS variables.",
+          "customFieldValues": [{ "fieldName": "Epic Link", "value": "Foundations" }]
+        },
+        {
+          "summary": "EPIC: Secure Auth & Identity",
+          "issueType": "Epic",
+          "priority": "High",
+          "description": "Advanced security layer including 2FA and Role Management.\n\n**Dates**: March 26 - April 05",
+          "customFieldValues": [{ "fieldName": "Epic Name", "value": "Auth" }]
+        },
+        {
+          "summary": "Story: Multi-Factor Auth Flow (OTP)",
+          "issueType": "Story",
+          "priority": "High",
+          "description": "As a user, I want 2FA security to protect my data.\n\n**Acceptance Criteria:**\n- System detects new login IPs\n- Secure OTP hash validation\n- Email notification via SMTP\n\n**Definition of Done:**\n- Rate limiting enforced on OTP endpoints.",
+          "customFieldValues": [{ "fieldName": "Epic Link", "value": "Auth" }]
+        },
+        {
+          "summary": "EPIC: Workspace & Team Sync",
+          "issueType": "Epic",
+          "priority": "Medium",
+          "description": "Project management and multi-user collaboration.\n\n**Dates**: April 06 - April 15",
+          "customFieldValues": [{ "fieldName": "Epic Name", "value": "Workspace" }]
+        },
+        {
+          "summary": "Story: Real-time Member Onboarding",
+          "issueType": "Story",
+          "priority": "Medium",
+          "description": "As an owner, I want to invite team members via email.\n\n**Acceptance Criteria:**\n- Secure invite tokens generated\n- Role selection (Viewer, Member, Manager)\n- Batch email notifications\n\n**Definition of Done:**\n- End-to-end integration tests passing.",
+          "customFieldValues": [{ "fieldName": "Epic Link", "value": "Workspace" }]
+        },
+        {
+          "summary": "EPIC: Kinetic Board & Task Orchestration",
+          "issueType": "Epic",
+          "priority": "High",
+          "description": "The core kanban board and sprint management experience.\n\n**Dates**: April 16 - April 30",
+          "customFieldValues": [{ "fieldName": "Epic Name", "value": "Board" }]
+        },
+        {
+          "summary": "Story: High-Performance Kanban Surface",
+          "issueType": "Story",
+          "priority": "High",
+          "description": "As a user, I want a fluid drag-and-drop board.\n\n**Acceptance Criteria:**\n- Zero-lag state synchronization\n- Kinetic animations on drag\n- Column CRUD\n\n**Definition of Done:**\n- Responsive design verified on mobile/tablet.",
+          "customFieldValues": [{ "fieldName": "Epic Link", "value": "Board" }]
+        }
+      ]
+    }
+  ]
+}
