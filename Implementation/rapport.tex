@@ -1,0 +1,59 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+
+\title{\textbf{Rapport de Projet : TaskFlow Workspace}}
+\author{Équipe de Développement}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\section{Introduction}
+Ce rapport présente la conception, l'architecture et la réalisation du projet \textbf{TaskFlow}, une plateforme collaborative de gestion de projets et de tâches. L'objectif principal de cette application est de fournir un espace de travail intuitif et sécurisé pour les équipes, en intégrant des fonctionnalités avancées telles que les tableaux Kanban, l'authentification sécurisée, et la gestion des rôles.
+
+\section{Conception et Architecture}
+Le projet repose sur une architecture moderne de type Client-Serveur. 
+
+\subsection{Technologies Utilisées}
+\begin{itemize}
+    \item \textbf{Backend :} Laravel (PHP), garantissant robustesse, sécurité et scalabilité.
+    \item \textbf{Frontend :} React.js avec une interface moderne, réactive et fluide.
+    \item \textbf{Base de Données :} MySQL, structurée pour gérer de manière relationnelle les utilisateurs, les projets, les tâches et les sprints.
+\end{itemize}
+
+\subsection{Structure de la Base de Données}
+Le modèle conceptuel de données inclut plusieurs entités clés :
+\begin{itemize}
+    \item \textbf{Utilisateurs (Users)} : Gère l'authentification, les mots de passe hachés, et les rôles.
+    \item \textbf{Projets (Projects)} : Regroupe les tâches et les membres de l'équipe.
+    \item \textbf{Tâches (Tasks)} : Entité centrale contenant les détails, les statuts (À faire, En cours, Terminé) et les assignations.
+\end{itemize}
+
+\section{Sécurité et Authentification}
+La sécurité est une priorité majeure dans TaskFlow.
+\begin{itemize}
+    \item \textbf{JWT (JSON Web Tokens)} : Utilisé pour authentifier et sécuriser les échanges entre le Frontend et le Backend.
+    \item \textbf{Vérification par Email} : Chaque nouvel utilisateur doit confirmer son adresse email lors de l'inscription.
+    \item \textbf{Protection contre les adresses IP inconnues} : Un système de détection des nouvelles adresses IP est mis en place. Si un utilisateur se connecte depuis une adresse non reconnue, un OTP (Mot de Passe à Usage Unique) lui est envoyé pour confirmer son identité. La logique a été optimisée pour fluidifier l'expérience des nouveaux inscrits.
+\end{itemize}
+
+\section{Développement Frontend}
+L'interface utilisateur a été développée en se concentrant sur l'ergonomie (UI/UX).
+\begin{itemize}
+    \item \textbf{Tableau de Bord des Projets} : Permet aux utilisateurs de visualiser l'ensemble de leurs projets sous forme de cartes interactives. Les actions de modification et de suppression ont été intégrées avec une gestion rigoureuse des événements pour éviter les conflits de navigation.
+    \item \textbf{Routage Dynamique} : Mise en place de routes protégées et de vues de détails des projets (Kanban, Liste, Dashboard) via React Router.
+\end{itemize}
+
+\section{Conclusion}
+Le projet TaskFlow démontre une implémentation réussie d'un outil de gestion de projet complet. Grâce à une séparation claire entre le Backend (API REST) et le Frontend (React), le système est performant et prêt à évoluer pour accueillir de nouvelles fonctionnalités à l'avenir.
+
+\end{document}
