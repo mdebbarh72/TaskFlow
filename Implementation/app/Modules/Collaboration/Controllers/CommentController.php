@@ -25,6 +25,7 @@ class CommentController extends Controller
     public function store(CreateCommentRequest $request): JsonResponse
     {
         $comment = $this->commentService->create($request->toDTO());
+        $comment->load('user');
 
         return response()->json($comment, 201);
     }

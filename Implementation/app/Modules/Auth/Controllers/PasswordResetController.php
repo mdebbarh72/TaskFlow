@@ -27,13 +27,15 @@ class PasswordResetController extends Controller
     public function reset(Request $request): JsonResponse
     {
         $request->validate([
-            'user_id'  => 'required|exists:users,id',
+            'email'    => 'required|email|exists:users,email',
             'code'     => 'required|string|size:6',
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        $user = \App\Modules\Users\Models\User::where('email', $request->email)->first();
+
         $isValid = $this->otpService->verify(new VerifyOTPDTO(
-            userId:  $request->user_id,
+            userId:  $user->id,
             purpose: OTPPurpose::PASSWORD_RESET,
             code:    $request->code
         ));
@@ -42,7 +44,7 @@ class PasswordResetController extends Controller
             return response()->json(['message' => 'Invalid OTP code'], 422);
         }
 
-        $this->resetService->reset($request->user_id, $request->password);
+        $this->resetService->reset($user->id, $request->password);
 
         return response()->json(['message' => 'Password reset successfully.']);
     }

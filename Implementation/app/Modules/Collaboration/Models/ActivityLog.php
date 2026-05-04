@@ -8,7 +8,7 @@ use App\Modules\Users\Models\User;
 
 class ActivityLog extends Model
 {
-    protected $fillable = ['user_id', 'action', 'actionable_id', 'actionable_type'];
+    protected $fillable = ['user_id', 'name', 'description', 'action', 'actionable_id', 'actionable_type', 'project_id'];
 
     public function actionable(): MorphTo
     {

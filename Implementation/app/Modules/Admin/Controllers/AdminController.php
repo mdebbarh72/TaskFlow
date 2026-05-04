@@ -5,6 +5,7 @@ namespace App\Modules\Admin\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Users\Models\User;
 use App\Modules\Projects\Models\Project;
+use App\Shared\Enums\UserStatus;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -17,8 +18,8 @@ class AdminController extends Controller
     {
         return response()->json([
             'total_users'   => User::count(),
-            'active_users'  => User::where('is_banned', false)->count(),
-            'banned_users'  => User::where('is_banned', true)->count(),
+            'active_users'  => User::where('status', UserStatus::ACTIVE->value)->count(),
+            'banned_users'  => User::where('status', UserStatus::BANNED->value)->count(),
             'total_projects' => Project::count(),
         ]);
     }
@@ -32,12 +33,12 @@ class AdminController extends Controller
 
         if ($search = $request->query('search')) {
             $query->where(function ($q) use ($search) {
-                $q->where('name', 'ILIKE', "%{$search}%")
+                $q->whereRaw("CONCAT(first_name, ' ', last_name) ILIKE ?", ["%{$search}%"])
                   ->orWhere('email', 'ILIKE', "%{$search}%");
             });
         }
 
-        $users = $query->select(['id', 'name', 'email', 'role', 'is_banned', 'created_at'])
+        $users = $query->select(['id', 'first_name', 'last_name', 'email', 'role', 'status', 'created_at'])
                        ->orderBy('created_at', 'desc')
                        ->paginate(15);
 
@@ -55,11 +56,11 @@ class AdminController extends Controller
             ], 403);
         }
 
-        $user->update(['is_banned' => true]);
+        $user->update(['status' => UserStatus::BANNED->value]);
 
         return response()->json([
             'message' => "User {$user->name} has been banned.",
-            'user'    => $user->fresh(['id', 'name', 'email', 'role', 'is_banned']),
+            'user'    => $user->fresh(['id', 'first_name', 'last_name', 'email', 'role', 'status']),
         ]);
     }
 
@@ -68,11 +69,11 @@ class AdminController extends Controller
      */
     public function unban(User $user): JsonResponse
     {
-        $user->update(['is_banned' => false]);
+        $user->update(['status' => UserStatus::ACTIVE->value]);
 
         return response()->json([
             'message' => "User {$user->name} has been unbanned.",
-            'user'    => $user->fresh(['id', 'name', 'email', 'role', 'is_banned']),
+            'user'    => $user->fresh(['id', 'first_name', 'last_name', 'email', 'role', 'status']),
         ]);
     }
 }

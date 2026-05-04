@@ -12,24 +12,30 @@ class CreateCommentRequest extends FormRequest
     public function authorize(): bool
     {
         $card = $this->route('card');
+        if (is_string($card)) {
+            $card = \App\Modules\Board\Models\Card::find($card);
+        }
 
-        return $card instanceof Card
-            && $this->user()->can('create', [Comment::class, $card]);
+        return $card instanceof \App\Modules\Board\Models\Card
+            && $this->user()->can('create', [\App\Modules\Collaboration\Models\Comment::class, $card]);
     }
 
     public function rules(): array
     {
         return [
-            'content' => 'required|string',
+            'description' => 'required|string',
         ];
     }
 
     public function toDTO(): CreateCommentDTO
     {
+        $card = $this->route('card');
+        $cardId = $card instanceof \App\Modules\Board\Models\Card ? $card->id : (int) $card;
+
         return new CreateCommentDTO(
-            cardId:  $this->route('card')->id,
+            cardId:  $cardId,
             userId:  $this->user()->id,
-            content: $this->validated('content'),
+            description: $this->validated('description'),
         );
     }
 }

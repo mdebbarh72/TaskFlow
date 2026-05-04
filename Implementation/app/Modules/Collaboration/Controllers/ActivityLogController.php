@@ -12,8 +12,8 @@ class ActivityLogController extends Controller
     {
         $this->authorize('view', $project);
 
-        $logs = $project->activityLogs()
-            ->with('user:id,name,email')
+        $logs = \App\Modules\Collaboration\Models\ActivityLog::where('project_id', $project->id)
+            ->with('user:id,first_name,last_name,email')
             ->latest()
             ->paginate(50);
 

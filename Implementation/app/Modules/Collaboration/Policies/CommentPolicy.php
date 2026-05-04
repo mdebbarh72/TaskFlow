@@ -34,7 +34,8 @@ class CommentPolicy
             return true;
         }
 
-        // Members can only comment on their assigned card
-        return $user->id === $card->assignee_id;
+        return in_array($membership->role, [
+            MembershipRole::MEMBER->value,
+        ], true);
     }
 }

@@ -9,5 +9,8 @@ class LogActivityDTO
         public readonly string $action,
         public readonly int    $actionableId,
         public readonly string $actionableType,
+        public readonly ?int   $projectId = null,
+        public readonly ?string $name = null,
+        public readonly ?string $description = null,
     ) {}
 }

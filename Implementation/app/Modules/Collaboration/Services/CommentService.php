@@ -20,7 +20,7 @@ class CommentService
         $comment = $this->comments->create([
             'card_id' => $dto->cardId,
             'user_id' => $dto->userId,
-            'content' => $dto->content,
+            'description' => $dto->description,
         ]);
 
         $this->activityLogger->log(new LogActivityDTO(

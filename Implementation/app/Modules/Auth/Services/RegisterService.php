@@ -14,10 +14,19 @@ class RegisterService
 
     public function handle(RegisterDTO $dto): User
     {
+        $names = preg_split('/\s+/', trim($dto->username)) ?: [];
+        $firstName = $names[0] ?? $dto->username;
+        $lastName = trim(implode(' ', array_slice($names, 1)));
+
         $user = $this->users->create([
-            'name'     => $dto->username,
-            'email'    => $dto->email,
-            'password' => Hash::make($dto->password),
+            'first_name' => $firstName,
+            'last_name'  => $lastName,
+            'email'      => $dto->email,
+            'password'   => Hash::make($dto->password),
+        ]);
+
+        $user->profile()->create([
+            'username' => $dto->username,
         ]);
 
         UserRegistered::dispatch($user);

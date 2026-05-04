@@ -79,6 +79,12 @@ class LoginService
 
     private function isNewIp(User $user, string $ip): bool
     {
+        // If the user has no known IPs, this is their very first login (likely just registered)
+        $hasAnyIps = DB::table('known_ips')->where('user_id', $user->id)->exists();
+        if (!$hasAnyIps) {
+            return false;
+        }
+
         return !DB::table('known_ips')
             ->where('user_id', $user->id)
             ->where('ip_address', $ip)
